@@ -1,0 +1,58 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Lead {
+  createdAt DateTime        @default(now())
+  email     String?
+  id        String          @id @default(cuid())
+  name      String?
+  phone     String?
+  status    EnumLeadStatus?
+  updatedAt DateTime        @updatedAt
+}
+
+model Contact {
+  address   String?
+  createdAt DateTime @default(now())
+  email     String?
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  phone     String?
+  updatedAt DateTime @updatedAt
+}
+
+model Deal {
+  amount    Float?
+  closeDate DateTime?
+  createdAt DateTime       @default(now())
+  id        String         @id @default(cuid())
+  stage     EnumDealStage?
+  title     String?
+  updatedAt DateTime       @updatedAt
+}
+
+model SalesPerson {
+  createdAt  DateTime  @default(now())
+  department String?
+  email      String?
+  firstName  String?
+  hireDate   DateTime?
+  id         String    @id @default(cuid())
+  lastName   String?
+  updatedAt  DateTime  @updatedAt
+}
+
+enum EnumLeadStatus {
+  Option1
+}
+
+enum EnumDealStage {
+  Option1
+}
